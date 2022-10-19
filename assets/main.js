@@ -4,6 +4,7 @@ const pizzaInput = document.getElementById('pizzaIdIngresado');
 const contenedorConsulta = document.getElementById('contenedorConsulta');
 const botonPizza = document.getElementById('buscaPizza');
 
+
 // 1- Array
 const pizzasLista = [
 	{
@@ -45,10 +46,10 @@ const pizzasLista = [
 ];
 
 // 2- traer elementos del LS si existen
-/* const getPizzaList = () => {
+/* const getPizzaList = () => { */
 	let listaPizza = JSON.parse(localStorage.getItem('pizzasLista')) || [];
-	return listaPizza;
-} */
+/* 	return listaPizza; */
+/* } */
 // 3- grabar en LS
 const saveLocalStorage = (listaPizza) => {
     localStorage.setItem('pizzasLista', JSON.stringify(listaPizza))
@@ -61,7 +62,6 @@ const crearPizzaCard = (listaPizza) => {
         <div class="card">
             <h2 class="pizza-title">Pizza de ${listaPizza.nombre}</h2>
             <h3 class="pizza-price">Precio: $ ${listaPizza.precio}</h3>
-
         </div>
     `;
 }
@@ -83,6 +83,7 @@ const crearIdError = () => {
 }
 
 
+
 // Funciones renders
 const renderCardsPizza = pizzasLista => contenedorConsulta.innerHTML += pizzasLista.map(crearPizzaCard).join('');
 const renderError = () => contenedorConsulta.innerHTML += crearErrorCard();
@@ -93,21 +94,17 @@ const renderNoId = () => contenedorConsulta.innerHTML += crearIdError();
 const searchPizza = (e) => {
     e.preventDefault();
     const id = pizzaInput.value;
-	console.log(id)
 	if(id) {
 		let pizzaEncontrada = pizzasLista.filter(pizza => pizza.id == id)
-		console.log(pizzaEncontrada);
 		if(pizzaEncontrada < id){
 			renderNoId();
 		}else {
 			renderCardsPizza(pizzaEncontrada);
 		}
 	}else{
-		console.log(id)
 		renderError();
 	}
 }
-
 
 // Inicializar
 const init = () => {
@@ -116,15 +113,3 @@ const init = () => {
 }
 
 init();
-
-
-const showPizza = (e) => {
-	e.preventDefault();
-	const idPizza = input.value;
-	console.log(idPizza);
-	let pizzaEncontrada = pizzasLista.filter(pizza => pizza.id == idPizza);
-	if(idPizza == pizzaEncontrada){
-		console.log('entra');
-	}
-	console.log('sale');
-}
