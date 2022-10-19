@@ -59,8 +59,8 @@ const saveLocalStorage = (listaPizza) => {
 const crearPizzaCard = (listaPizza) => {
     return `
         <div class="card">
-            <h2 class="pizza-title">${listaPizza.nombre}</h2>
-            <h3 class="pizza-price">$ ${listaPizza.precio}</h3>
+            <h2 class="pizza-title">Pizza de ${listaPizza.nombre}</h2>
+            <h3 class="pizza-price">Precio: $ ${listaPizza.precio}</h3>
 
         </div>
     `;
@@ -68,7 +68,7 @@ const crearPizzaCard = (listaPizza) => {
 
 const crearErrorCard = () => {
     return `
-        <div class="card">
+        <div class="card errorVacioDiv">
             <h2 class="pizza-title">¡Debe ingresar un numero!</h2>
         </div>
     `;
@@ -76,7 +76,7 @@ const crearErrorCard = () => {
 
 const crearIdError = () => {
 	return `
-	<div class="card">
+	<div class="card errorIdDiv">
 		<h2 class="pizza-title">¡No coincide el numero!</h2>
 	</div>
 	`;
@@ -117,3 +117,14 @@ const init = () => {
 
 init();
 
+
+const showPizza = (e) => {
+	e.preventDefault();
+	const idPizza = input.value;
+	console.log(idPizza);
+	let pizzaEncontrada = pizzasLista.filter(pizza => pizza.id == idPizza);
+	if(idPizza == pizzaEncontrada){
+		console.log('entra');
+	}
+	console.log('sale');
+}
