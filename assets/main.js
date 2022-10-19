@@ -53,7 +53,7 @@ const saveLocalStorage = (listaPizza) => {
 
 
 // Renderiza elementos
-const crearPizzaCard = (listaPizza) => {
+const crearPizza = (listaPizza) => {
     return `
         <div class="card">
             <h2 class="pizza-title">Pizza de ${listaPizza.nombre}</h2>
@@ -81,7 +81,7 @@ const crearIdError = () => {
 
 
 // Funciones renders
-const renderCardsPizza = pizzasLista => contenedorConsulta.innerHTML += pizzasLista.map(crearPizzaCard).join('');
+const renderPizza = pizzasLista => contenedorConsulta.innerHTML += pizzasLista.map(crearPizza).join('');
 const renderError = () => contenedorConsulta.innerHTML += crearErrorCard();
 const renderNoId = () => contenedorConsulta.innerHTML += crearIdError();
 
@@ -95,7 +95,7 @@ const searchPizza = (e) => {
 		if(pizzaEncontrada < id){
 			renderNoId();
 		}else {
-			renderCardsPizza(pizzaEncontrada);
+			renderPizza(pizzaEncontrada);
 		}
 	}else{
 		renderError();
