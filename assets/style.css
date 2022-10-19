@@ -5,15 +5,27 @@
 }
 
 body{
-    background-color: black;
+    background-color: rgb(32, 32, 32);
     color: white;
     display: flex;
     flex-direction: column;
     align-items: center;
 }
 
+#primerSection{
+    margin-top: 25px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#primerSection h1 {
+    font-size: 30px;
+}
+
 .contenedorDatos{
     margin: 20px 0 20px 0;
+    padding-top: 20px;
 }
 
 .cajaConsulta{
@@ -47,4 +59,16 @@ body{
 .errorVacioDiv{
     background-color: red;
     box-shadow: inset 0 0 15px #290000;
+}
+
+.piePagina{
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    height: 40px;
+    background: rgb(14, 14, 14);
+    border-radius: 10px 10px 0px 0px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }

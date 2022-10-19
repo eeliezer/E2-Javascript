@@ -5,7 +5,7 @@ const contenedorConsulta = document.getElementById('contenedorConsulta');
 const botonPizza = document.getElementById('buscaPizza');
 
 
-// 1- Array
+// Array
 const pizzasLista = [
 	{
 		id: 1,
@@ -45,18 +45,14 @@ const pizzasLista = [
 	}
 ];
 
-// 2- traer elementos del LS si existen
-/* const getPizzaList = () => { */
-	let listaPizza = JSON.parse(localStorage.getItem('pizzasLista')) || [];
-/* 	return listaPizza; */
-/* } */
-// 3- grabar en LS
+
+// Guardar en LS
 const saveLocalStorage = (listaPizza) => {
     localStorage.setItem('pizzasLista', JSON.stringify(listaPizza))
 };
 
 
-// 4- Renderiza elementos
+// Renderiza elementos
 const crearPizzaCard = (listaPizza) => {
     return `
         <div class="card">
