@@ -1,8 +1,7 @@
 // Variables
 const form = document.getElementById('form');
-const pizzaInput = document.getElementById('pizzaIdIngresado');
+const pizzaInput = document.querySelector(".idIngresado");
 const contenedorConsulta = document.getElementById('contenedorConsulta');
-const botonPizza = document.getElementById('buscaPizza');
 
 
 // Array
@@ -46,66 +45,52 @@ const pizzasLista = [
 ];
 
 
-// Guardar en LS
-const saveLocalStorage = (listaPizza) => {
-    localStorage.setItem('pizzasLista', JSON.stringify(listaPizza))
+// Renderiza elementos
+const crearPizza = (pizza) => {
+
+	if(!pizza){
+		contenedorConsulta.innerHTML = `
+		<div class="card errorIdDiv">
+			<h2 class="pizza-title">¡No coincide el numero!</h2>
+		</div>
+		`;
+	}else {
+		contenedorConsulta.innerHTML =  `
+			<div class="card">
+				<h2 class="pizza-title">Pizza de ${pizza.nombre.toUpperCase()}</h2>
+				<h3 class="pizza-price">Precio: $ ${pizza.precio}</h3>
+			</div>
+		`;
+	}
 };
 
-
-// Renderiza elementos
-const crearPizza = (listaPizza) => {
-    return `
-        <div class="card">
-            <h2 class="pizza-title">Pizza de ${listaPizza.nombre}</h2>
-            <h3 class="pizza-price">Precio: $ ${listaPizza.precio}</h3>
-        </div>
-    `;
-}
-
 const crearErrorCard = () => {
-    return `
+    contenedorConsulta.innerHTML = `
         <div class="card errorVacioDiv">
             <h2 class="pizza-title">¡Debe ingresar un numero!</h2>
         </div>
     `;
-}
+};
 
-const crearIdError = () => {
-	return `
-	<div class="card errorIdDiv">
-		<h2 class="pizza-title">¡No coincide el numero!</h2>
-	</div>
-	`;
-}
-
-
-
-// Funciones renders
-const renderPizza = pizzasLista => contenedorConsulta.innerHTML += pizzasLista.map(crearPizza).join('');
-const renderError = () => contenedorConsulta.innerHTML += crearErrorCard();
-const renderNoId = () => contenedorConsulta.innerHTML += crearIdError();
+const pizzaEncontrada = (valor) => pizzasLista.find((pizza) => pizza.id === valor);
 
 
 // Funcion buscar pizza
-const searchPizza = (e) => {
+const submitSearch = (e) => {
     e.preventDefault();
-    const id = pizzaInput.value;
-	if(id) {
-		let pizzaEncontrada = pizzasLista.filter(pizza => pizza.id == id)
-		if(pizzaEncontrada < id){
-			renderNoId();
-		}else {
-			renderPizza(pizzaEncontrada);
-		}
-	}else{
-		renderError();
+    const idIngresado = pizzaInput.value;
+	if(!idIngresado) {
+		crearErrorCard();
+		return;
 	}
+	const pizzaBuscada = pizzaEncontrada(Number(idIngresado));
+	crearPizza(pizzaBuscada);
+	form.reset();
 }
 
 // Inicializar
 const init = () => {
-	window.addEventListener('DOMContentLoaded', saveLocalStorage(pizzasLista));
-    form.addEventListener("submit", searchPizza)
+    form.addEventListener("submit", submitSearch)
 }
 
 init();
